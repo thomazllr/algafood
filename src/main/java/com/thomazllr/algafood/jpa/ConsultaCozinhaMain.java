@@ -1,9 +1,12 @@
 package com.thomazllr.algafood.jpa;
 
 import com.thomazllr.algafood.Application;
+import com.thomazllr.algafood.domain.model.Cozinha;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
+
+import java.util.List;
 
 public class ConsultaCozinhaMain {
     public static void main(String[] args) {
@@ -12,5 +15,12 @@ public class ConsultaCozinhaMain {
                 .run(args);
 
         CadastroCozinha cadastroCozinha = context.getBean(CadastroCozinha.class);
+
+        List<Cozinha> cozinhas = cadastroCozinha.listaCozinhas();
+
+        for (Cozinha cozinha : cozinhas) {
+            System.out.println(cozinha.getId() + ": " + cozinha.getNome());
+        }
+
     }
 }

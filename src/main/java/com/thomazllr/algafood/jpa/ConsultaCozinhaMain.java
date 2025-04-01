@@ -22,5 +22,19 @@ public class ConsultaCozinhaMain {
             System.out.println(cozinha.getId() + ": " + cozinha.getNome());
         }
 
+        var cozinhaNova = new Cozinha();
+        cozinhaNova.setNome("Brasileira");
+
+        Cozinha cozinhaSalva = cadastroCozinha.salvarCozinha(cozinhaNova);
+
+        System.out.println("Cozinha salva com sucesso! -> " + cozinhaSalva.getNome());
+
+        var cozinhaBuscada = cadastroCozinha.buscarCozinha(2L);
+
+        System.out.println("Cozinha buscada com sucesso com id 2! -> " + cozinhaBuscada.getNome());
+
+
+
+
     }
 }

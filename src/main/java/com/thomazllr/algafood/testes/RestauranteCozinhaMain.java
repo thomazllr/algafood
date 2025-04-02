@@ -20,17 +20,14 @@ public class RestauranteCozinhaMain {
 
         RestauranteRepository restauranteRepository = context.getBean(RestauranteRepository.class);
 
-        var restauranteNovo = new Restaurante();
-        restauranteNovo.setNome("Seara");
-        restauranteNovo.setTaxaFrete(BigDecimal.TWO);
+        var restaurantes = restauranteRepository.listar();
 
-        Restaurante restauranteSalvo = restauranteRepository.salvar(restauranteNovo);
-
-        System.out.println("Restaurante salva com sucesso! -> " + restauranteSalvo.getNome());
-
-        var restauranteBuscado = restauranteRepository.buscar(1L);
-
-        System.out.println("Cozinha buscada com sucesso com id! -> " + restauranteBuscado.getNome());
+        for (Restaurante restaurante : restaurantes) {
+            System.out.printf("Restaurante: %s -- Taxa de frete: %.2f -- Cozinha: %s\n",
+                    restaurante.getNome(),
+                    restaurante.getTaxaFrete(),
+                    restaurante.getCozinha().getNome());
+        }
 
 
     }

@@ -1,7 +1,8 @@
-package com.thomazllr.algafood.jpa;
+package com.thomazllr.algafood.testes;
 
 import com.thomazllr.algafood.Application;
 import com.thomazllr.algafood.domain.model.Cozinha;
+import com.thomazllr.algafood.domain.repository.CozinhaRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ApplicationContext;
@@ -14,9 +15,9 @@ public class ConsultaCozinhaMain {
                 .web(WebApplicationType.NONE)
                 .run(args);
 
-        CadastroCozinha cadastroCozinha = context.getBean(CadastroCozinha.class);
+        CozinhaRepository cozinhasRepository = context.getBean(CozinhaRepository.class);
 
-        List<Cozinha> cozinhas = cadastroCozinha.listaCozinhas();
+        List<Cozinha> cozinhas = cozinhasRepository.listar();
 
         for (Cozinha cozinha : cozinhas) {
             System.out.println(cozinha.getId() + ": " + cozinha.getNome());
@@ -25,15 +26,13 @@ public class ConsultaCozinhaMain {
         var cozinhaNova = new Cozinha();
         cozinhaNova.setNome("Brasileira");
 
-        Cozinha cozinhaSalva = cadastroCozinha.salvarCozinha(cozinhaNova);
+        Cozinha cozinhaSalva = cozinhasRepository.salvar(cozinhaNova);
 
         System.out.println("Cozinha salva com sucesso! -> " + cozinhaSalva.getNome());
 
-        var cozinhaBuscada = cadastroCozinha.buscarCozinha(2L);
+        var cozinhaBuscada = cozinhasRepository.buscar(2L);
 
         System.out.println("Cozinha buscada com sucesso com id 2! -> " + cozinhaBuscada.getNome());
-
-
 
 
     }

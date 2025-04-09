@@ -26,9 +26,9 @@ public class ConsultaCozinhaMain {
         var cozinhaNova = new Cozinha();
         cozinhaNova.setNome("Brasileira");
 
-        Cozinha cozinhaSalva = cozinhasRepository.salvar(cozinhaNova);
+        Cozinha cozinhaPersistida = cozinhasRepository.salvar(cozinhaNova);
 
-        System.out.println("Cozinha salva com sucesso! -> " + cozinhaSalva.getNome());
+        System.out.println("Cozinha salva com sucesso! -> " + cozinhaPersistida.getNome());
 
         var cozinhaBuscada = cozinhasRepository.buscar(2L);
 

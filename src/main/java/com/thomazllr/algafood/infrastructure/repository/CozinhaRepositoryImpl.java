@@ -31,6 +31,7 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
         return em.merge(cozinha);
     }
 
+
     @Transactional
     @Override
     public void excluir(Cozinha cozinha) {

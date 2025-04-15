@@ -3,6 +3,7 @@ package com.thomazllr.algafood.infrastructure.repository;
 import com.thomazllr.algafood.domain.model.Cozinha;
 import com.thomazllr.algafood.domain.repository.CozinhaRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,11 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
 
     @Override
     public Cozinha buscar(Long id) {
-        return em.find(Cozinha.class, id);
+        var cozinha = em.find(Cozinha.class, id);
+        if (cozinha == null) {
+            throw new EntityNotFoundException("Entity /type: 'cozinha'/ not found");
+        }
+        return cozinha;
     }
 
     @Transactional
@@ -34,8 +39,8 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
 
     @Transactional
     @Override
-    public void excluir(Cozinha cozinha) {
-        cozinha = buscar(cozinha.getId());
+    public void excluir(Long id) {
+        var cozinha = buscar(id);
         em.remove(cozinha);
     }
 }
